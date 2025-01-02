@@ -29,6 +29,10 @@
 !$CONTAINER_BG_COLOR ?= "#1168BD"
 !$CONTAINER_BORDER_COLOR ?= "#3C7FC0"
 
+!$COMPONENT_FONT_COLOR ?= $ELEMENT_FONT_COLOR
+!$COMPONENT_BG_COLOR ?= "#1B88F3"
+!$COMPONENT_BORDER_COLOR ?= "#3C7FC0"
+
 !$SYSTEM_BOUNDARY_COLOR ?= $BOUNDARY_COLOR
 !$SYSTEM_BOUNDARY_BG_COLOR ?= $BOUNDARY_BG_COLOR
 !$SYSTEM_BOUNDARY_BORDER_STYLE ?= $BOUNDARY_BORDER_STYLE
@@ -55,6 +59,7 @@
 !$ENTERPRISE_BOUNDARY_TYPE ?= "enterprise"
 !$ENTERPRISE_BOUNDARY_LEGEND_TEXT ?= "enterprise boundary"
 !$CONTAINER_LEGEND_TEXT ?= "container"
+!$COMPONENT_LEGEND_TEXT ?= "component"
 ' Styling
 ' ##################################
 
@@ -65,8 +70,8 @@ UpdateElementStyle("external_system", $EXTERNAL_SYSTEM_BG_COLOR, $EXTERNAL_SYSTE
 
 UpdateBoundaryStyle("system", $bgColor=$SYSTEM_BOUNDARY_BG_COLOR, $fontColor=$SYSTEM_BOUNDARY_COLOR, $borderColor=$SYSTEM_BOUNDARY_COLOR, $type="$SYSTEM_BOUNDARY_TYPE", $legendText="$SYSTEM_BOUNDARY_LEGEND_TEXT")
 UpdateBoundaryStyle("enterprise", $bgColor=$ENTERPRISE_BOUNDARY_BG_COLOR, $fontColor=$ENTERPRISE_BOUNDARY_COLOR, $borderColor=$ENTERPRISE_BOUNDARY_COLOR, $type="$ENTERPRISE_BOUNDARY_TYPE", $legendText="$ENTERPRISE_BOUNDARY_LEGEND_TEXT")
-UpdateElementStyle("container", $SYSTEM_BG_COLOR, $SYSTEM_FONT_COLOR, $SYSTEM_BORDER_COLOR, $legendText="$CONTAINER_LEGEND_TEXT")
-
+UpdateElementStyle("container", $CONTAINER_BG_COLOR, $CONTAINER_FONT_COLOR, $CONTAINER_BORDER_COLOR, $legendText="$CONTAINER_LEGEND_TEXT")
+UpdateElementStyle("component", $COMPONENT_BG_COLOR, $COMPONENT_FONT_COLOR, $COMPONENT_BORDER_COLOR, $legendText="$COMPONENT_LEGEND_TEXT")
 ' shortcuts with default colors
 !unquoted procedure AddPersonTag($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $legendText="", $legendSprite="", $type="", $borderStyle="", $borderThickness="")
   $addElementTagInclReuse("person", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $type, $legendText, $legendSprite, $borderStyle, $borderThickness)
@@ -89,6 +94,10 @@ UpdateElementStyle("container", $SYSTEM_BG_COLOR, $SYSTEM_FONT_COLOR, $SYSTEM_BO
 !endprocedure
 
 !unquoted procedure AddContainerTag($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $legendText="", $legendSprite="", $type="", $borderStyle="", $borderThickness="")
+  $addElementTagInclReuse("system", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $type, $legendText, $legendSprite, $borderStyle, $borderThickness)
+!endprocedure
+
+!unquoted procedure AddComponentTag($tagStereo, $bgColor="", $fontColor="", $borderColor="", $shadowing="", $shape="", $sprite="", $legendText="", $legendSprite="", $type="", $borderStyle="", $borderThickness="")
   $addElementTagInclReuse("system", $tagStereo, $bgColor, $fontColor, $borderColor, $shadowing, $shape, $sprite, $type, $legendText, $legendSprite, $borderStyle, $borderThickness)
 !endprocedure
 
@@ -441,6 +450,11 @@ rectangle "$getPerson($label, $type, $descr, $sprite)$getProps()" $toStereos("ex
 !unquoted procedure ContainerDb($alias, $label, $descr="", $sprite="", $tags="", $link="", $type="")
   ' $type reuses $techn definition of $tags
   $getElementLine("database", "container", $alias, $label, $type, $descr, $sprite, $tags, $link)
+!endprocedure
+
+!unquoted procedure Component($alias, $label, $descr="", $sprite="", $tags="", $link="", $type="", $baseShape="rectangle")
+  ' $type reuses $techn definition of $tags
+  $getElementLine($baseShape, "component", $alias, $label, $type, $descr, $sprite, $tags, $link)
 !endprocedure
 
 ' Boundaries
