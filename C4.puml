@@ -424,6 +424,11 @@ rectangle "$getPerson($label, $type, $descr, $sprite)$getProps()" $toStereos("ex
   $getElementLine("queue", "external_system", $alias, $label, $type, $descr, $sprite, $tags, $link)
 !endprocedure
 
+!unquoted procedure Container($alias, $label, $descr="", $sprite="", $tags="", $link="", $type="")
+  ' $type reuses $techn definition of $tags
+  $getElementLine("database", "container", $alias, $label, $type, $descr, $sprite, $tags, $link)
+!endprocedure
+
 ' Boundaries
 ' ##################################
 
