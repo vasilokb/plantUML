@@ -452,6 +452,11 @@ rectangle "$getPerson($label, $type, $descr, $sprite)$getProps()" $toStereos("ex
   $getElementLine("database", "container", $alias, $label, $type, $descr, $sprite, $tags, $link)
 !endprocedure
 
+!unquoted procedure ContainerQueue($alias, $label, $descr="", $sprite="", $tags="", $link="", $type="")
+  ' $type reuses $techn definition of $tags
+  $getElementLine("queue", "container", $alias, $label, $type, $descr, $sprite, $tags, $link)
+!endprocedure
+
 !unquoted procedure Component($alias, $label, $descr="", $sprite="", $tags="", $link="", $type="", $baseShape="rectangle")
   ' $type reuses $techn definition of $tags
   $getElementLine($baseShape, "component", $alias, $label, $type, $descr, $sprite, $tags, $link)
